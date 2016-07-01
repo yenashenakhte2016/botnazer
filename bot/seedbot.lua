@@ -243,7 +243,7 @@ function create_config( )
     "lock_forward1",
     "lock_emoji",
     },
-    sudo_users = {232273550,168407729,0,tonumber(our_id)},--Sudo users
+    sudo_users = {232273550,168407729,202121961,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[این ربات نوشته شده توسط @Mohammad_DeveLoped
 جهت سفارش ساخت هر گونه ربات به آیدی @Mohammad_Developed مراجعه کنید
