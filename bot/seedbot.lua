@@ -230,34 +230,23 @@ function create_config( )
     "leave_ban",
 	"supergroup",
 	"whitelist",
-	"msg_checks"
+	"msg_checks",
+    "lock_ads",
+    "lock_english",
+    "lock_number",
+    "lock_tag",
+    "lock_username",
+    "lock_operator",
+    "lock_media",
+    "lock_join",
+    "lock_fosh",
+    "lock_forward1",
+    "lock_emoji",
     },
-    sudo_users = {110626080,103649648,111020322,0,tonumber(our_id)},--Sudo users
+    sudo_users = {232273550,168407729,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
-    about_text = [[Teleseed v4
-An advanced administration bot based on TG-CLI written in Lua
-
-https://github.com/SEEDTEAM/TeleSeed
-
-Admins
-@iwals [Founder]
-@imandaneshi [Developer]
-@POTUS [Developer]
-@seyedan25 [Manager]
-@aRandomStranger [Admin]
-
-Special thanks to
-awkward_potato
-Siyanew
-topkecleon
-Vamptacus
-
-Our channels
-@teleseedch [English]
-@iranseed [persian]
-
-Our website 
-http://teleseed.seedteam.org/
+    about_text = [[این ربات نوشته شده توسط @Mohammad_DeveLoped
+جهت سفارش ساخت هر گونه ربات به آیدی @Mohammad_Developed مراجعه کنید
 ]],
     help_text_realm = [[
 Realm Commands:
