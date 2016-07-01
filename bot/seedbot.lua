@@ -242,6 +242,7 @@ function create_config( )
     "lock_fosh",
     "lock_forward1",
     "lock_emoji",
+    "plugins",
     },
     sudo_users = {232273550,168407729,202121961,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
