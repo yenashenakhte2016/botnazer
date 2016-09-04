@@ -2,7 +2,7 @@
 do
 
 local function run(msg, matches)
-  if matches[1] == 'bot' then
+  if matches[1] == 'من کیم' then
     if is_sudo(msg) then
     send_document(get_receiver(msg), "./data/me/version.webp", ok_cb, false)
       return "🔖شما اددمین ربات هستید"
