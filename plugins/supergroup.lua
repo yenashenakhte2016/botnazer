@@ -39,7 +39,7 @@ local function check_member_super(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = msg.to.id
       save_data(_config.moderation.data, data)
-	  local text = 'SuperGroup has been added!'
+	  local text = 'سوپر گروه به دیتابیس اضافه شد!'
       return reply_msg(msg.id, text, ok_cb, false)
     end
   end
@@ -63,7 +63,7 @@ local function check_member_superrem(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = nil
       save_data(_config.moderation.data, data)
-	  local text = 'SuperGroup has been removed'
+	  local text = 'سوپرگروه از دیتابیس حذف شد'
       return reply_msg(msg.id, text, ok_cb, false)
     end
   end
@@ -1314,7 +1314,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return "SuperGroup ID for " ..string.gsub(msg.to.print_name, "_", " ").. ":\n\n"..msg.to.id
+				return "آیدی سوپر گروه " ..string.gsub(msg.to.print_name, "_", " ").. ":\n\n"..msg.to.id
 			end
 		end
 
@@ -1362,10 +1362,10 @@ local function run(msg, matches)
 			end
 			local group_link = data[tostring(msg.to.id)]['settings']['set_link']
 			if not group_link then
-				return "Create a link using /newlink first!\n\nOr if I am not creator use /setlink to set your link"
+				return "شما هنوز لینک نساخته اید\nبرای ساخت لینک  کافیست\nافزودن لینک\nساخت لینک\nرا ارسال کنید"
 			end
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
-			return "Group link:\n"..group_link
+			return "لینک گروه:\n"..group_link
 		end
 
 		if matches[1] == "invite" and is_sudo(msg) then
@@ -1478,8 +1478,8 @@ local function run(msg, matches)
 					channel_set_admin(receiver, user, ok_cb, false)
 					data[tostring(msg.to.id)]['set_owner'] = tostring(matches[2])
 					save_data(_config.moderation.data, data)
-					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set ["..matches[2].."] as owner")
-					local text = "[ "..matches[2].." ] added as owner"
+					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set ["..matches[2].."] صاحب گروه شد")
+					local text = "[ "..matches[2].." ] صاحب گروه شد"
 					return text
 				end]]
 				local	get_cmd = 'setowner'
@@ -2054,7 +2054,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'راهنما' and not is_owner(msg) then
-			text = "دستور راهنما فقط برای ادمین کار میکند : \n ادمین : \n @negative_officiall"
+			text = "دستور راهنما فقط برای ادمین کار میکند"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'راهنما' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
