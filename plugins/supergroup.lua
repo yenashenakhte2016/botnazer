@@ -606,7 +606,7 @@ end
   else
    local now = tonumber(os.time())
    expiree =  expire..math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1
-   expire = expiree..' days later'
+   expire = expiree..' روز دیگر'
  end
   local settings = data[tostring(target)]['settings']
   local text = "تنظیمات سوپر گروه:\n\n- قفل لینک: "..settings.lock_link.."\n - قفل فلود:"..settings.flood.."\n- قفل اسپم:"..settings.lock_spam.."\n- قفل عربی/فارسی:"..settings.lock_arabic.."\n- قفل اددممبر:"..settings.lock_member.."\n- قفل اسم بلند :"..settings.lock_rtl.."\n- قفل پیام ورود و خروج :"..settings.lock_tgservice.."\n- قفل استیکر:"..settings.lock_sticker.."\n- قفل خصوصی"..settings.public.."\n- قفل سختگیرانه:"..settings.strict.."\nحساسیت به اسپم ["..NUM_MSG_MAX.."]\n\n- خفه کردن ویدئو: "..Video.."\n- خفه کردن ویس: "..Audio.."\n- خفه کردن عکس: "..Photo.."\n- خفه کردن گیف: "..Gifs.."\n- خفه کردن متن: "..Documents.."\n- خفه کردن همه: "..All.."\n\n- نوع گروه: سوپر گروه\n- تاریخ انقضای گروه "..expire
@@ -1737,7 +1737,7 @@ local function run(msg, matches)
 				return enable_strict_rules(msg, data, target)
 			end
 		end
-        if matches[1]:lower() == 'فعال کردن' and is_momod(msg) then
+        if matches[1]:lower() == 'سایلنت' and is_momod(msg) then
 		local target = msg.to.id
 				if matches[2] == 'عکس' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked photo posting")
@@ -1803,7 +1803,7 @@ local function run(msg, matches)
 				return disable_strict_rules(msg, data, target)
 			end
 		end
-         if matches[1]:lower() == 'غیرفعال کردن' and is_momod(msg) then
+         if matches[1]:lower() == 'حذف سایلنت' and is_momod(msg) then
 			local target = msg.to.id
 				if matches[2] == 'عکس' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked photo posting")
