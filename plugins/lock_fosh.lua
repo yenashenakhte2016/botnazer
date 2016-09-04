@@ -2,7 +2,7 @@ local function run(msg)
     
     local data = load_data(_config.moderation.data)
     
-     if data[tostring(msg.to.id)]['settings']['fosh'] == '✅' then
+     if data[tostring(msg.to.id)]['settings']['lock_badword'] == 'yes' then
       
     local chat = get_receiver(msg)
 local name = user_print_name(msg.from)
@@ -10,8 +10,7 @@ local name = user_print_name(msg.from)
 if msg.to.type == 'channel' and not is_momod(msg) then
 
  delete_msg(msg.id, ok_cb, true)
- kick_user(msg.from.id, msg.to.id)
-send_large_msg(chat, "👤کاربر : [ @" .. msg.from.username .. "] \n👤شناسه کاربر : [" .. msg.from.id .."] \n ❌اخراج شد\n🚦دلیل: ارسال کلمات توهین آمیز" )      end
+     end
    end
 end
     

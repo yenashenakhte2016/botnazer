@@ -298,6 +298,63 @@ local function unlock_group_arabic(msg, data, target)
   end
 end
 
+
+    local function lock_group_badword(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_badword_lock = data[tostring(target)]['settings']['lock_badword']
+  if group_badword_lock == 'yes' then
+    return 'فحش از قبل قفل بوده است'
+  else
+    data[tostring(target)]['settings']['lock_badword'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'فحش قفل شد'
+  end
+end
+
+local function unlock_group_badword(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_badword_lock = data[tostring(target)]['settings']['lock_badword']
+  if group_badword_lock == 'no' then
+    return 'فحش از قبل باز بوده است'
+  else
+    data[tostring(target)]['settings']['lock_badword'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'فحش باز شد'
+  end
+end
+
+   local function lock_group_english(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_english_lock = data[tostring(target)]['settings']['lock_english']
+  if group_english_lock == 'yes' then
+    return 'انگلیسی از قبل قفل بوده است'
+  else
+    data[tostring(target)]['settings']['lock_english'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'زبان انگلیسی قفل شد'
+  end
+end
+
+local function unlock_group_english(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_english_lock = data[tostring(target)]['settings']['lock_english']
+  if group_english_lock == 'no' then
+    return 'انگلیسی از قبل باز بوده است'
+  else
+    data[tostring(target)]['settings']['lock_english'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'زبان انگلیسی باز شد'
+  end
+end
+   
 local function lock_group_membermod(msg, data, target)
   if not is_momod(msg) then
     return
@@ -554,6 +611,16 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['lock_rtl'] = 'no'
 		end
 end
+     	if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_badword'] then
+			data[tostring(target)]['settings']['lock_badword'] = 'no'
+		end
+end
+     if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_english'] then
+			data[tostring(target)]['settings']['lock_english'] = 'no'
+		end
+end
       if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_tgservice'] then
 			data[tostring(target)]['settings']['lock_tgservice'] = 'no'
@@ -609,7 +676,7 @@ end
    expire = expiree..' روز دیگر'
  end
   local settings = data[tostring(target)]['settings']
-  local text = "تنظیمات سوپر گروه:\n\n- قفل لینک: "..settings.lock_link.."\n - قفل فلود:"..settings.flood.."\n- قفل اسپم:"..settings.lock_spam.."\n- قفل عربی/فارسی:"..settings.lock_arabic.."\n- قفل اددممبر:"..settings.lock_member.."\n- قفل اسم بلند :"..settings.lock_rtl.."\n- قفل پیام ورود و خروج :"..settings.lock_tgservice.."\n- قفل استیکر:"..settings.lock_sticker.."\n- قفل خصوصی"..settings.public.."\n- قفل سختگیرانه:"..settings.strict.."\nحساسیت به اسپم ["..NUM_MSG_MAX.."]\n\n- خفه کردن ویدئو: "..Video.."\n- خفه کردن ویس: "..Audio.."\n- خفه کردن عکس: "..Photo.."\n- خفه کردن گیف: "..Gifs.."\n- خفه کردن متن: "..Documents.."\n- خفه کردن همه: "..All.."\n\n- نوع گروه: سوپر گروه\n- تاریخ انقضای گروه "..expire
+  local text = "تنظیمات سوپر گروه:\n\n- قفل لینک: "..settings.lock_link.."\n - قفل فلود:"..settings.flood.."\n- قفل اسپم:"..settings.lock_spam.."\n- قفل عربی/فارسی:"..settings.lock_arabic.."\n- قفل اددممبر:"..settings.lock_member.."\n- قفل اسم بلند :"..settings.lock_rtl.."\n- قفل پیام ورود و خروج :"..settings.lock_tgservice.."\n- قفل استیکر:"..settings.lock_sticker.."\n- قفل انگلیسی: "..settings.lock_english.."\n- قفل فحش: "..settings.lock_badword.."\n- قفل خصوصی"..settings.public.."\n- قفل سختگیرانه:"..settings.strict.."\nحساسیت به اسپم ["..NUM_MSG_MAX.."]\n\n- خفه کردن ویدئو: "..Video.."\n- خفه کردن ویس: "..Audio.."\n- خفه کردن عکس: "..Photo.."\n- خفه کردن گیف: "..Gifs.."\n- خفه کردن متن: "..Documents.."\n- خفه کردن همه: "..All.."\n\n- نوع گروه: سوپر گروه\n- تاریخ انقضای گروه "..expire
  local text = string.gsub(text,'yes','[فعال|🔒]')
   local text = string.gsub(text,'no','[غیرفعال|🔓]')
   return text
@@ -1712,6 +1779,14 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked arabic ")
 				return lock_group_arabic(msg, data, target)
 			end
+            if matches[2] == 'فحش' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked badword ")
+				return lock_group_badword(msg, data, target)
+			end
+              if matches[2] == 'انگلیسی' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked english ")
+				return lock_group_english(msg, data, target)
+			end
 			if matches[2] == 'اعضا' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked member ")
 				return lock_group_membermod(msg, data, target)
@@ -1782,6 +1857,16 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked member ")
 				return unlock_group_membermod(msg, data, target)
 			end
+
+            if matches[2] == 'انگلیسی' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked english")
+				return unlock_group_english(msg, data, target)
+			end
+			if matches[2] == 'فحش' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked badword ")
+				return unlock_group_badword(msg, data, target)
+			end
+
 			if matches[2]:lower() == 'ار تی ال' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked RTL chars. in names")
 				return unlock_group_rtl(msg, data, target)
