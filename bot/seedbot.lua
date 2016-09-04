@@ -246,10 +246,9 @@ function create_config( )
     "plugins",
     "botinfo"
     },
-    sudo_users = {232273550,202121961,0,tonumber(our_id)},--Sudo users
+    sudo_users = {250049437,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
-    about_text = [[این ربات نوشته شده توسط @Mohammad_DeveLoped
-جهت سفارش ساخت هر گونه ربات به آیدی @Mohammad_Developed مراجعه کنید
+    about_text = [[
 ]],
     help_text_realm = [[
 Realm Commands:
